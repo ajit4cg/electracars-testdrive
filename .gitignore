@@ -1,0 +1,15 @@
+# Salesforce
+.sfdx/
+.sf/
+
+# Credentials - never commit these
+force-app/main/default/namedCredentials/
+force-app/main/default/customMetadata/TwilioConfig.Default.md-meta.xml
+
+# Temp files
+fetch_class.apex
+fetch_flow.apex
+*.apex
+
+# Node
+node_modules/

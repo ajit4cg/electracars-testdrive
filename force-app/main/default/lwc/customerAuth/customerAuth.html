@@ -1,0 +1,171 @@
+<template>
+    <template if:true={isLoggedIn}>
+        <div class="auth-bar">
+            <span class="welcome-msg">Hi, {currentUserName}</span>
+            <button class="btn-my-bookings" onclick={toggleBookings}>My Bookings</button>
+            <button class="btn-logout" onclick={handleLogout}>Sign Out</button>
+        </div>
+
+        <template if:true={showBookings}>
+            <div class="bookings-panel">
+                <h3>Your Test Drives</h3>
+                <template if:true={hasBookings}>
+                    <template for:each={myBookings} for:item="booking">
+                        <div key={booking.id} class={booking.cssClass}>
+                            <div class="booking-row">
+                                <span class="booking-vehicle">{booking.vehicle}</span>
+                                <span class={booking.statusClass}>{booking.status}</span>
+                            </div>
+                            <div class="booking-row">
+                                <span class="booking-date">{booking.date} · {booking.time}</span>
+                                <span class="booking-ref">{booking.ref}</span>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+                <template if:false={hasBookings}>
+                    <p class="no-bookings">No test drives booked yet. Book one below!</p>
+                </template>
+            </div>
+        </template>
+    </template>
+
+    <template if:false={isLoggedIn}>
+        <template if:false={showModal}>
+            <div class="auth-bar">
+                <button class="btn-signin" onclick={openLoginModal}>Sign In / Register</button>
+            </div>
+        </template>
+
+        <template if:true={showModal}>
+            <div class={modalOverlayClass} onclick={closeModal}>
+                <div class="modal-card" onclick={stopPropagation}>
+                    <template if:false={isGuestVisitor}>
+                        <button class="modal-close" onclick={closeModal}>X</button>
+                    </template>
+
+                    <template if:true={isGuestVisitor}>
+                        <div class="guest-intro">
+                            <p class="eyebrow">ElectraCars Member Access</p>
+                            <h1>Sign in or create your account</h1>
+                            <p class="guest-copy">Log in first to view the site, book a test drive, and track your bookings.</p>
+                        </div>
+                    </template>
+
+                    <div class="tab-switcher">
+                        <button class={loginTabClass} onclick={showLoginTab}>Sign In</button>
+                        <button class={registerTabClass} onclick={showRegisterTab}>Register</button>
+                    </div>
+
+                    <template if:true={isLoginTab}>
+                        <div class="form-body">
+                            <div class="form-field">
+                                <label for="loginEmail">Email</label>
+                                <input
+                                    type="email"
+                                    id="loginEmail"
+                                    class="form-input"
+                                    placeholder="your@email.com"
+                                    value={loginEmail}
+                                    onchange={handleLoginEmailChange}
+                                />
+                            </div>
+                            <div class="form-field">
+                                <label for="loginPassword">Password</label>
+                                <input
+                                    type="password"
+                                    id="loginPassword"
+                                    class="form-input"
+                                    placeholder="Enter your password"
+                                    value={loginPassword}
+                                    onchange={handleLoginPasswordChange}
+                                />
+                            </div>
+                            <template if:true={authError}>
+                                <p class="auth-error">{authError}</p>
+                            </template>
+                            <button class="btn-submit" onclick={handleLogin} disabled={isLoading}>
+                                <template if:true={isLoading}>Signing in...</template>
+                                <template if:false={isLoading}>Sign In</template>
+                            </button>
+                            <p class="forgot-link">
+                                <a href="/electracars/ForgotPassword">Forgot password?</a>
+                            </p>
+                        </div>
+                    </template>
+
+                    <template if:true={isRegisterTab}>
+                        <div class="form-body">
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label for="regFirstName">First Name</label>
+                                    <input
+                                        type="text"
+                                        id="regFirstName"
+                                        class="form-input"
+                                        value={regData.firstName}
+                                        onchange={handleRegChange}
+                                        data-field="firstName"
+                                    />
+                                </div>
+                                <div class="form-field">
+                                    <label for="regLastName">Last Name</label>
+                                    <input
+                                        type="text"
+                                        id="regLastName"
+                                        class="form-input"
+                                        value={regData.lastName}
+                                        onchange={handleRegChange}
+                                        data-field="lastName"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="regEmail">Email</label>
+                                <input
+                                    type="email"
+                                    id="regEmail"
+                                    class="form-input"
+                                    value={regData.email}
+                                    onchange={handleRegChange}
+                                    data-field="email"
+                                />
+                            </div>
+                            <div class="form-field">
+                                <label for="regPhone">Phone</label>
+                                <input
+                                    type="tel"
+                                    id="regPhone"
+                                    class="form-input"
+                                    placeholder="+91 9999999999"
+                                    value={regData.phone}
+                                    onchange={handleRegChange}
+                                    data-field="phone"
+                                />
+                            </div>
+                            <div class="form-field">
+                                <label for="regPassword">Password</label>
+                                <input
+                                    type="password"
+                                    id="regPassword"
+                                    class="form-input"
+                                    placeholder="Min 8 characters"
+                                    value={regData.password}
+                                    onchange={handleRegChange}
+                                    data-field="password"
+                                />
+                            </div>
+                            <template if:true={authError}>
+                                <p class="auth-error">{authError}</p>
+                            </template>
+                            <button class="btn-submit" onclick={handleRegister} disabled={isLoading}>
+                                <template if:true={isLoading}>Creating account...</template>
+                                <template if:false={isLoading}>Create Account</template>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </template>
+</template>

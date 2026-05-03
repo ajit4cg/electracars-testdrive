@@ -1,0 +1,616 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELECTRA CARS — PREMIUM DARK LUXURY THEME
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Root tokens ─────────────────────────────────────────────────────────── */
+:host {
+    --gold:        #c9a84c;
+    --gold-light:  #e8c96a;
+    --gold-dim:    rgba(201,168,76,0.15);
+    --dark-bg:     #080808;
+    --dark-card:   #111111;
+    --dark-border: rgba(255,255,255,0.08);
+    --dark-hover:  rgba(255,255,255,0.04);
+    --text-primary: #f0f0f0;
+    --text-muted:   #888888;
+    --gold-accent:  #c9a84c;
+}
+
+/* ── Container ───────────────────────────────────────────────────────────── */
+.booking-container {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 0 80px;
+    color: var(--text-primary);
+    background: var(--dark-bg);
+    min-height: 100vh;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    background: #080808;
+    padding: 0 40px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--dark-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-section::after {
+    content: 'ELECTRA';
+    position: absolute;
+    bottom: -20px; left: 50%; transform: translateX(-50%);
+    font-family: 'Trebuchet MS', 'Arial Narrow', Arial, sans-serif; letter-spacing: 0.05em;
+    font-size: 8rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.02);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.hero-title {
+    font-family: 'Trebuchet MS', 'Arial Narrow', Arial, sans-serif; letter-spacing: 0.05em;
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+.hero-title span {
+    color: var(--gold);
+}
+
+.hero-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin: 0;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+/* ── Gold divider line ───────────────────────────────────────────────────── */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ── Agent CTA ───────────────────────────────────────────────────────────── */
+.agent-cta-section {
+    text-align: center;
+    padding: 40px 24px 0;
+}
+
+.btn-agent-chat {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 2px;
+    padding: 16px 40px;
+    font-family: 'Trebuchet MS', 'Arial Narrow', Arial, sans-serif; letter-spacing: 0.05em;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.btn-agent-chat::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    z-index: 0;
+}
+
+.btn-agent-chat:hover::before { transform: scaleX(1); }
+.btn-agent-chat:hover { color: #000; }
+.btn-agent-chat > * { position: relative; z-index: 1; }
+
+.chat-icon { font-size: 1.1rem; }
+
+.badge-new {
+    background: var(--gold);
+    color: #000;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+}
+
+.or-divider {
+    color: var(--text-muted);
+    margin: 24px 0 0;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* ── Form Card ───────────────────────────────────────────────────────────── */
+.booking-form-card {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    border-radius: 0;
+    padding: 48px 40px;
+    margin: 32px 24px 0;
+    position: relative;
+}
+
+.booking-form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.form-title {
+    font-family: 'Trebuchet MS', 'Arial Narrow', Arial, sans-serif; letter-spacing: 0.05em;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 32px;
+    color: #ffffff;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ── Personalization Banner ──────────────────────────────────────────────── */
+.personalization-banner {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-left: 3px solid var(--gold);
+    padding: 20px 24px;
+    margin-bottom: 32px;
+}
+
+.personalization-banner h3 {
+    margin: 4px 0 8px;
+    font-family: 'Trebuchet MS', 'Arial Narrow', Arial, sans-serif; letter-spacing: 0.05em;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.personalization-banner p {
+    margin: 0;
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+.personalization-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.personalization-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.personalization-pill {
+    background: rgba(201,168,76,0.12);
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 2px;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ── Step Indicator ──────────────────────────────────────────────────────── */
+.step-indicator {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 40px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--dark-border);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.step.active {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.step.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+}
+
+.step.completed {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(201,168,76,0.4);
+    color: rgba(201,168,76,0.6);
+}
+
+.step-number {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* ── Section heading ─────────────────────────────────────────────────────── */
+.step-content h3 {
+    font-family: 'Trebuchet MS', 'Arial Narrow', Arial, sans-serif; letter-spacing: 0.05em;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--dark-border);
+}
+
+/* ── Vehicle Grid ────────────────────────────────────────────────────────── */
+.vehicle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.vehicle-card {
+    border: 1px solid var(--dark-border);
+    background: rgba(255,255,255,0.02);
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.vehicle-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.vehicle-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    background: rgba(201,168,76,0.04);
+}
+
+.vehicle-card:hover::after { transform: scaleX(1); }
+
+.vehicle-card.selected {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+}
+
+.vehicle-card.selected::after { transform: scaleX(1); }
+
+.vehicle-card.recommended {
+    border-color: rgba(201,168,76,0.5);
+    background: rgba(201,168,76,0.06);
+}
+
+.vehicle-img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85) contrast(1.1);
+    transition: filter 0.3s;
+}
+
+.vehicle-card:hover .vehicle-img,
+.vehicle-card.selected .vehicle-img {
+    filter: brightness(1) contrast(1.1);
+}
+
+.vehicle-info {
+    padding: 14px 16px;
+}
+
+.vehicle-badge {
+    display: inline-block;
+    margin: 0 0 8px;
+    padding: 3px 10px;
+    background: var(--gold-dim);
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.vehicle-name {
+    font-family: 'Trebuchet MS', 'Arial Narrow', Arial, sans-serif; letter-spacing: 0.05em;
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0;
+    color: #fff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.vehicle-year {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    margin: 2px 0;
+    letter-spacing: 0.1em;
+}
+
+.vehicle-price {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin: 4px 0 0;
+}
+
+/* ── Form Fields ─────────────────────────────────────────────────────────── */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.form-field { display: flex; flex-direction: column; gap: 8px; }
+.form-field.full-width { grid-column: 1 / -1; }
+
+.form-field label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.form-input {
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--dark-border);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    transition: border-color 0.2s, background 0.2s;
+    outline: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
+.form-input:focus {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.04);
+}
+
+.form-input option {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* ── Channel Options ─────────────────────────────────────────────────────── */
+.channel-options {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.channel-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border: 1px solid var(--dark-border);
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    transition: all 0.2s;
+}
+
+.channel-option.selected {
+    border-color: var(--gold);
+    background: var(--gold-dim);
+    color: var(--gold);
+    font-weight: 600;
+}
+
+.channel-option input[type="radio"] { display: none; }
+
+/* ── Booking Summary ─────────────────────────────────────────────────────── */
+.booking-summary {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--dark-border);
+    border-left: 2px solid var(--gold);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+}
+
+.booking-summary h4 {
+    margin: 0 0 12px;
+    font-size: 0.65rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+}
+
+.booking-summary p {
+    margin: 6px 0;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.btn-row { display: flex; gap: 12px; justify-content: flex-end; margin-top: 8px; }
+
+.btn-next, .btn-confirm {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 14px 36px;
+    font-family: 'Trebuchet MS', 'Arial Narrow', Arial, sans-serif; letter-spacing: 0.05em;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 0;
+}
+
+.btn-next:hover, .btn-confirm:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+}
+
+.btn-next:disabled, .btn-confirm:disabled {
+    background: rgba(255,255,255,0.1);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-back {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--dark-border);
+    padding: 14px 28px;
+    font-family: 'Trebuchet MS', 'Arial Narrow', Arial, sans-serif; letter-spacing: 0.05em;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 0;
+}
+
+.btn-back:hover {
+    border-color: var(--text-muted);
+    color: #fff;
+}
+
+/* ── Error ───────────────────────────────────────────────────────────────── */
+.error-msg {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(255,107,107,0.08);
+    border-left: 2px solid #ff6b6b;
+    letter-spacing: 0.02em;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+    .booking-form-card { padding: 32px 20px; margin: 24px 12px 0; }
+    .form-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2rem; }
+    .step-label { display: none; }
+    .vehicle-grid { grid-template-columns: 1fr 1fr; }
+    .personalization-banner { flex-direction: column; }
+    .personalization-pills { justify-content: flex-start; }
+    .hero-section { padding: 48px 20px 40px; }
+}
+
+/* ── Vehicle step Next button — right aligned ────────────────────────────── */
+.vehicle-next-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+/* ── Hero Logo ───────────────────────────────────────────────────────────── */
+.hero-logo-wrap {
+    width: 100%;
+    padding: 20px 0 16px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+.hero-logo {
+    height: 200px;
+    min-width: 300px;
+    width: 50%;
+    object-fit: contain;
+    display: inline-block;
+    filter: drop-shadow(0 0 24px rgba(201,168,76,0.5));
+}
+
+/* Ensure hero text sits above everything */
+.hero-section .hero-title,
+.hero-section .hero-subtitle {
+    position: relative;
+    z-index: 1;
+}

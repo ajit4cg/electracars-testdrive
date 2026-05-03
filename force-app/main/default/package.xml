@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+
+    <!-- ── Apex Classes ──────────────────────────────────────────────────── -->
+    <types>
+        <members>AgentInputController</members>
+        <members>BookTestDriveAction</members>
+        <members>CustomerInsightController</members>
+        <members>CustomerInsightControllerTest</members>
+        <members>CustomerPortalController</members>
+        <members>DealershipRoutingService</members>
+        <members>DealerSlotController</members>
+        <members>GetDealerBookingsAction</members>
+        <members>GetNearbyDealersAction</members>
+        <members>SendSMSAction</members>
+        <members>TestDriveBookingController</members>
+        <members>TestDriveNotificationService</members>
+        <members>TwilioSMSService</members>
+        <name>ApexClass</name>
+    </types>
+
+    <!-- ── LWC ───────────────────────────────────────────────────────────── -->
+    <types>
+        <members>agentChatLauncher</members>
+        <members>customerAuth</members>
+        <members>dealerSlotPicker</members>
+        <members>testDriveBooking</members>
+        <members>testDriveConfirmation</members>
+        <members>userInfoForm</members>
+        <name>LightningComponentBundle</name>
+    </types>
+
+    <!-- ── Custom Objects ────────────────────────────────────────────────── -->
+    <types>
+        <members>Contact</members>
+        <members>Test_Drive__c</members>
+        <members>TestDrive__c</members>
+        <members>TwilioConfig__mdt</members>
+        <name>CustomObject</name>
+    </types>
+
+    <!-- ── Flows ─────────────────────────────────────────────────────────── -->
+    <types>
+        <members>Book_Test_Drive</members>
+        <members>BookTestDRIVE1</members>
+        <members>Confirm_Location_Flow</members>
+        <members>DriveTheDream_TestDrive</members>
+        <members>Route_To_Test_Drive_Agent</members>
+        <members>Send_Confirmation_SMS_Mail</members>
+        <members>TestDrive_Confirmation_Notification</members>
+        <name>Flow</name>
+    </types>
+
+    <!-- ── Custom Fields ─────────────────────────────────────────────────── -->
+    <types>
+        <members>Account.Preferred_Vehicle__c</members>
+        <members>Contact.PreferredVehicleModel__c</members>
+        <members>Lead.Account_Lead__c</members>
+        <members>MessagingSession.city__c</members>
+        <members>MessagingSession.first_name__c</members>
+        <members>MessagingSession.last_name__c</members>
+        <members>MessagingSession.latitude__c</members>
+        <members>MessagingSession.longitude__c</members>
+        <members>MessagingSession.Vehicle_Model__c</members>
+        <members>MessagingSession.zip__c</members>
+        <members>Test_Drive__c.Lead__c</members>
+        <members>Test_Drive__c.Mobile_Number__c</members>
+        <members>Test_Drive__c.Model_Interested__c</members>
+        <members>Test_Drive__c.Pincdoe__c</members>
+        <members>Test_Drive__c.Status__c</members>
+        <members>Test_Drive__c.Test_Drive_Date_Time__c</members>
+        <members>TestDrive__c.AssignedDealership__c</members>
+        <members>TestDrive__c.Available_Slots__c</members>
+        <members>TestDrive__c.BookingSource__c</members>
+        <members>TestDrive__c.CustomerEmail__c</members>
+        <members>TestDrive__c.CustomerPhone__c</members>
+        <members>TestDrive__c.Lead__c</members>
+        <members>TestDrive__c.PreferredChannel__c</members>
+        <members>TestDrive__c.PreferredDate__c</members>
+        <members>TestDrive__c.PreferredTime__c</members>
+        <members>TestDrive__c.Status__c</members>
+        <members>TestDrive__c.VehicleModel__c</members>
+        <members>TestDrive__c.ZipCode__c</members>
+        <name>CustomField</name>
+    </types>
+
+    <!-- ── Custom Metadata ───────────────────────────────────────────────── -->
+    <types>
+        <members>TwilioConfig.Default</members>
+        <members>TwilioConfig__mdt.Default</members>
+        <name>CustomMetadata</name>
+    </types>
+
+    <!-- ── Bot ───────────────────────────────────────────────────────────── -->
+    <types>
+        <members>Agentforce_Service_Agent</members>
+        <name>Bot</name>
+    </types>
+
+    <!-- ── Bot Version ───────────────────────────────────────────────────── -->
+    <types>
+        <members>Agentforce_Service_Agent.v1</members>
+        <name>BotVersion</name>
+    </types>
+
+    <!-- ── Custom Application ────────────────────────────────────────────── -->
+    <types>
+        <members>Test_Drive_Booking</members>
+        <name>CustomApplication</name>
+    </types>
+
+    <!-- ── Experience Site / Network ─────────────────────────────────────── -->
+    <types>
+        <members>ElectraCars</members>
+        <name>Network</name>
+    </types>
+
+    <!-- ── Remote Site Settings ──────────────────────────────────────────── -->
+    <types>
+        <members>ESWSampleMessaging</members>
+        <members>TwilioAPI</members>
+        <name>RemoteSiteSetting</name>
+    </types>
+
+    <!-- ── Named Credentials ─────────────────────────────────────────────── -->
+    <types>
+        <members>TwilioCredential</members>
+        <name>NamedCredential</name>
+    </types>
+
+    <!-- ── Static Resources ──────────────────────────────────────────────── -->
+    <types>
+        <members>electra_logo</members>
+        <name>StaticResource</name>
+    </types>
+
+    <version>66.0</version>
+</Package>

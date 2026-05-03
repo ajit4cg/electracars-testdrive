@@ -1,0 +1,66 @@
+<template>
+    <div class="confirmation-container">
+        <div class="success-icon" aria-hidden="true">✅</div>
+        <h2 class="confirmation-title">You're all set, {customerName}!</h2>
+        <p class="confirmation-subtitle">Your test drive is confirmed. We'll see you soon.</p>
+
+        <div class="booking-details-card">
+            <div class="detail-row">
+                <span class="detail-icon">🎫</span>
+                <div>
+                    <p class="detail-label">Booking Reference</p>
+                    <p class="detail-value">{bookingRef}</p>
+                </div>
+            </div>
+            <div class="detail-row">
+                <span class="detail-icon">🚘</span>
+                <div>
+                    <p class="detail-label">Vehicle</p>
+                    <p class="detail-value">{vehicle}</p>
+                </div>
+            </div>
+            <div class="detail-row">
+                <span class="detail-icon">📅</span>
+                <div>
+                    <p class="detail-label">Date &amp; Time</p>
+                    <p class="detail-value">{preferredDate} · {preferredTime}</p>
+                </div>
+            </div>
+            <template if:true={dealershipName}>
+                <div class="detail-row">
+                    <span class="detail-icon">📍</span>
+                    <div>
+                        <p class="detail-label">Dealership</p>
+                        <p class="detail-value">{dealershipName}</p>
+                        <template if:true={dealershipAddress}>
+                            <p class="detail-address">{dealershipAddress}</p>
+                        </template>
+                        <template if:true={dealershipMapsUrl}>
+                            <a href={dealershipMapsUrl} target="_blank" class="maps-link">📍 Get Directions</a>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <div class="detail-row">
+                <span class="detail-icon">💬</span>
+                <div>
+                    <p class="detail-label">Confirmation sent via</p>
+                    <p class="detail-value">{channel}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-add-calendar" onclick={addToCalendar}>
+                📆 Add to Calendar
+            </button>
+            <button class="btn-book-another" onclick={bookAnother}>
+                Book Another Test Drive
+            </button>
+        </div>
+
+        <p class="footer-note">
+            Questions? Chat with our AI assistant anytime or call your dealership directly.
+        </p>
+    </div>
+</template>

@@ -1,0 +1,218 @@
+<template>
+    <div class="booking-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-logo-wrap">
+                <img src={logoUrl} alt="Electra Cars" class="hero-logo" />
+            </div>
+            <h1 class="hero-title">{heroTitle}</h1>
+            <p class="hero-subtitle">{heroSubtitle}</p>
+        </div>
+
+        <!-- Agentforce Chat Launcher (primary CTA) -->
+        <div class="agent-cta-section">
+            <button class="btn-agent-chat" onclick={launchAgentChat} aria-label="Chat with AI assistant to book test drive">
+                <span class="chat-icon">💬</span>
+                <span>Book with AI Assistant</span>
+                <span class="badge-new">Fastest</span>
+            </button>
+            <p class="or-divider">— or fill the form below —</p>
+        </div>
+
+        <!-- Booking Form (fallback) -->
+        <template if:false={bookingConfirmed}>
+            <div class="booking-form-card">
+                <h2 class="form-title">Schedule a Test Drive</h2>
+
+                <template if:true={hasPersonalization}>
+                    <div class="personalization-banner">
+                        <div>
+                            <p class="personalization-eyebrow">{personalizationMeta}</p>
+                            <h3>{personalizationTitle}</h3>
+                            <p>{personalization.nudgeMessage}</p>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Step indicator -->
+                <div class="step-indicator" role="progressbar" aria-valuenow={currentStep} aria-valuemin="1" aria-valuemax="3">
+                    <template for:each={steps} for:item="step">
+                        <div key={step.id} class={step.cssClass}>
+                            <span class="step-number">{step.number}</span>
+                            <span class="step-label">{step.label}</span>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Step 1: Vehicle Selection -->
+                <template if:true={isStep1}>
+                    <div class="step-content">
+                        <h3>Choose Your Vehicle</h3>
+                        <div class="vehicle-grid">
+                            <template for:each={vehicleModels} for:item="vehicle">
+                                <div key={vehicle.id}
+                                     class={vehicle.cssClass}
+                                     onclick={selectVehicle}
+                                     data-id={vehicle.id}
+                                     data-name={vehicle.name}
+                                     role="button"
+                                     tabindex="0"
+                                     aria-pressed={vehicle.selected}>
+                                    <img src={vehicle.imageUrl} alt={vehicle.name} class="vehicle-img" />
+                                    <div class="vehicle-info">
+                                        <template if:true={vehicle.isRecommended}>
+                                            <p class="vehicle-badge">Recommended for you</p>
+                                        </template>
+                                        <p class="vehicle-name">{vehicle.name}</p>
+                                        <p class="vehicle-year">{vehicle.year}</p>
+                                        <p class="vehicle-price">From ${vehicle.price}</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="vehicle-next-row">
+                            <button class="btn-next" onclick={goToStep2} disabled={noVehicleSelected}>Next →</button>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Step 2: Date, Time & Location -->
+                <template if:true={isStep2}>
+                    <div class="step-content">
+                        <h3>Pick a Date & Location</h3>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="preferredDate">Preferred Date</label>
+                                <input type="date"
+                                       id="preferredDate"
+                                       class="form-input"
+                                       value={formData.preferredDate}
+                                       min={minDate}
+                                       onchange={handleInputChange}
+                                       onclick={handleDateClick}
+                                       data-field="preferredDate"
+                                       required />
+                            </div>
+                            <div class="form-field">
+                                <label for="preferredTime">Preferred Time</label>
+                                <select id="preferredTime"
+                                        class="form-input"
+                                        onchange={handleInputChange}
+                                        data-field="preferredTime">
+                                    <option value="">Select a time slot</option>
+                                    <option value="Morning (9AM-12PM)">Morning (9AM–12PM)</option>
+                                    <option value="Afternoon (12PM-4PM)">Afternoon (12PM–4PM)</option>
+                                    <option value="Evening (4PM-7PM)">Evening (4PM–7PM)</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="zipCode">Your Zip Code</label>
+                                <input type="text"
+                                       id="zipCode"
+                                       class="form-input"
+                                       placeholder="e.g. 90210"
+                                       maxlength="10"
+                                       value={formData.zipCode}
+                                       onchange={handleInputChange}
+                                       data-field="zipCode"
+                                       required />
+                            </div>
+                        </div>
+                        <div class="btn-row">
+                            <button class="btn-back" onclick={goToStep1}>← Back</button>
+                            <button class="btn-next" onclick={goToStep3} disabled={step2Invalid}>Next →</button>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Step 3: Contact Details -->
+                <template if:true={isStep3}>
+                    <div class="step-content">
+                        <h3>Your Details</h3>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" class="form-input"
+                                       value={formData.firstName}
+                                       onchange={handleInputChange}
+                                       data-field="firstName" required />
+                            </div>
+                            <div class="form-field">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" class="form-input"
+                                       value={formData.lastName}
+                                       onchange={handleInputChange}
+                                       data-field="lastName" required />
+                            </div>
+                            <div class="form-field">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" class="form-input"
+                                       value={formData.email}
+                                       onchange={handleInputChange}
+                                       data-field="email" required />
+                            </div>
+                            <div class="form-field">
+                                <label for="phone">Phone / WhatsApp</label>
+                                <input type="tel" id="phone" class="form-input"
+                                       placeholder="+1 (555) 000-0000"
+                                       value={formData.phone}
+                                       onchange={handleInputChange}
+                                       data-field="phone" />
+                            </div>
+                            <div class="form-field full-width">
+                                <label>Preferred Confirmation Channel</label>
+                                <div class="channel-options" role="radiogroup" aria-label="Preferred confirmation channel">
+                                    <template for:each={channelOptions} for:item="ch">
+                                        <label key={ch.value} class={ch.cssClass}>
+                                            <input type="radio"
+                                                   name="channel"
+                                                   value={ch.value}
+                                                   checked={ch.checked}
+                                                   onchange={handleChannelChange} />
+                                            <span>{ch.icon} {ch.label}</span>
+                                        </label>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Booking Summary -->
+                        <div class="booking-summary">
+                            <h4>Booking Summary</h4>
+                            <p>🚘 <strong>{selectedVehicleName}</strong></p>
+                            <p>📅 {formData.preferredDate} · {formData.preferredTime}</p>
+                            <p>📍 Near zip: {formData.zipCode}</p>
+                        </div>
+
+                        <div class="btn-row">
+                            <button class="btn-back" onclick={goToStep2}>← Back</button>
+                            <button class="btn-confirm" onclick={submitBooking} disabled={isSubmitting}>
+                                <template if:true={isSubmitting}>Booking...</template>
+                                <template if:false={isSubmitting}>Confirm Test Drive 🚗</template>
+                            </button>
+                        </div>
+
+                        <template if:true={errorMessage}>
+                            <p class="error-msg" role="alert">{errorMessage}</p>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <!-- Confirmation Screen -->
+        <template if:true={bookingConfirmed}>
+            <c-test-drive-confirmation
+                booking-ref={confirmedBooking.testDriveName}
+                vehicle={selectedVehicleName}
+                preferred-date={formData.preferredDate}
+                preferred-time={formData.preferredTime}
+                dealership-name={confirmedBooking.dealershipName}
+                dealership-address={confirmedBooking.dealershipAddress}
+                dealership-maps-url={confirmedBooking.dealershipMapsUrl}
+                channel={formData.preferredChannel}
+                customer-name={formData.firstName}>
+            </c-test-drive-confirmation>
+        </template>
+    </div>
+</template>

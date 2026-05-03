@@ -1,0 +1,17 @@
+<template>
+    <!-- Proactive nudge bubble -->
+    <template if:true={showNudge}>
+        <div class="nudge-bubble" role="dialog" aria-label="AI assistant prompt" aria-live="polite">
+            <button class="nudge-close" onclick={dismissNudge} aria-label="Dismiss">✕</button>
+            <div class="nudge-avatar">🤖</div>
+            <div class="nudge-content">
+                <p class="nudge-greeting">Hi there! 👋</p>
+                <p class="nudge-message">{nudgeMessage}</p>
+                <button class="nudge-cta" onclick={openChat}>
+                    Chat with Electra AI →
+                </button>
+            </div>
+        </div>
+    </template>
+    <!-- ESW renders its own floating chat button automatically after bootstrap loads -->
+</template>

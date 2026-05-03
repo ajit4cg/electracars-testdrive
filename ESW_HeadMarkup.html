@@ -1,0 +1,19 @@
+<script type='text/javascript'>
+function initEmbeddedMessaging() {
+    try {
+        embeddedservice_bootstrap.settings.language = 'en_US';
+        embeddedservice_bootstrap.init(
+            '00Dbm00000fmLKH',
+            'Test_Drive_Agent',
+            'https://orgfarm-37643d5221.my.site.com/ESWTestDriveAgent1776677894384',
+            {scrt2URL: 'https://orgfarm-37643d5221.my.salesforce-scrt.com'}
+        );
+    } catch (err) {
+        console.error('Error loading Embedded Messaging: ', err);
+    }
+}
+</script>
+<script type='text/javascript'
+    src='https://orgfarm-37643d5221.my.site.com/ESWTestDriveAgent1776677894384/assets/js/bootstrap.min.js'
+    onload='initEmbeddedMessaging()'>
+</script>

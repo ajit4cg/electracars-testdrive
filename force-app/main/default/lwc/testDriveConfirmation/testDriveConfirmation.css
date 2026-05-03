@@ -1,0 +1,198 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELECTRA CARS — CONFIRMATION SCREEN — PREMIUM DARK LUXURY
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.confirmation-container {
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    padding: 64px 40px;
+    background: #0d0d0d;
+    min-height: 60vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ambient glow */
+.confirmation-container::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 300px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.success-icon {
+    font-size: 3rem;
+    margin-bottom: 24px;
+    display: block;
+    filter: drop-shadow(0 0 20px rgba(201,168,76,0.5));
+}
+
+.confirmation-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 8px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.confirmation-subtitle {
+    color: #888;
+    font-size: 0.9rem;
+    margin: 0 0 48px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Gold divider */
+.confirmation-subtitle::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    margin: 24px auto 0;
+}
+
+/* ── Booking Details Card ────────────────────────────────────────────────── */
+.booking-details-card {
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-top: 2px solid #c9a84c;
+    padding: 0;
+    text-align: left;
+    max-width: 520px;
+    margin: 0 auto 40px;
+    position: relative;
+}
+
+.detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s;
+}
+
+.detail-row:last-child { border-bottom: none; }
+.detail-row:hover { background: rgba(201,168,76,0.03); }
+
+.detail-icon {
+    font-size: 1.2rem;
+    margin-top: 2px;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.detail-label {
+    font-size: 0.65rem;
+    color: #c9a84c;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.detail-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f0f0f0;
+    margin: 0;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.03em;
+}
+
+.detail-address {
+    font-size: 0.82rem;
+    color: #777;
+    margin: 4px 0 0;
+}
+
+/* ── Maps Link ───────────────────────────────────────────────────────────── */
+.maps-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: #c9a84c;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+}
+
+.maps-link:hover { border-color: #c9a84c; }
+
+/* ── Action Buttons ──────────────────────────────────────────────────────── */
+.action-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+}
+
+.btn-add-calendar {
+    background: #c9a84c;
+    color: #000;
+    border: none;
+    padding: 14px 32px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-add-calendar:hover {
+    background: #e8c96a;
+    transform: translateY(-1px);
+}
+
+.btn-book-another {
+    background: transparent;
+    color: #c9a84c;
+    border: 1px solid #c9a84c;
+    padding: 14px 32px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-book-another::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #c9a84c;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+    z-index: 0;
+}
+
+.btn-book-another:hover::before { transform: scaleX(1); }
+.btn-book-another:hover { color: #000; }
+.btn-book-another span { position: relative; z-index: 1; }
+
+/* ── Footer Note ─────────────────────────────────────────────────────────── */
+.footer-note {
+    color: #555;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}

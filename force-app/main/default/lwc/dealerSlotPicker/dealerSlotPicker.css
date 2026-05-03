@@ -1,0 +1,228 @@
+/* ── Step label ─────────────────────────────────────────────────────────── */
+.step-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #0070d2;
+    margin-bottom: 0.75rem;
+}
+
+/* ── Calendar wrapper ───────────────────────────────────────────────────── */
+.date-picker-wrapper {
+    max-width: 340px;
+    margin: 0 auto;
+}
+
+/* Month header row */
+.cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.cal-month-label {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #16325c;
+}
+
+.cal-nav {
+    background: none;
+    border: 1px solid #dddbda;
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #0070d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+}
+
+.cal-nav:hover:not([disabled]) {
+    background: #e8f4fd;
+}
+
+.cal-nav[disabled] {
+    color: #c9c7c5;
+    cursor: not-allowed;
+}
+
+/* 7-column grid */
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+/* Day-of-week headers */
+.cal-dow {
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #706e6b;
+    padding: 4px 0;
+    text-transform: uppercase;
+}
+
+/* Base day cell */
+.cal-cell {
+    text-align: center;
+    padding: 7px 4px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    user-select: none;
+}
+
+.cal-blank {
+    cursor: default;
+}
+
+/* Available day */
+.cal-available {
+    color: #16325c;
+    background: #f4f6f9;
+}
+
+.cal-available:hover {
+    background: #0070d2;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Today highlight */
+.cal-today {
+    color: #0070d2;
+    background: #e8f4fd;
+    font-weight: 700;
+    border: 1px solid #0070d2;
+}
+
+.cal-today:hover {
+    background: #0070d2;
+    color: #fff;
+}
+
+/* Selected day */
+.cal-selected {
+    background: #0070d2 !important;
+    color: #fff !important;
+    font-weight: 700;
+    border-radius: 6px;
+}
+
+/* Disabled (past / Sunday) */
+.cal-disabled {
+    color: #c9c7c5;
+    background: transparent;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.cal-hint {
+    font-size: 0.75rem;
+    color: #706e6b;
+    margin-top: 0.6rem;
+    text-align: center;
+}
+
+/* ── Date badge (Phase 2) ────────────────────────────────────────────────── */
+.date-badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #e8f4fd;
+    border-left: 4px solid #0070d2;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.change-date-btn {
+    background: none;
+    border: none;
+    color: #0070d2;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    margin-left: auto;
+}
+
+.change-date-btn:hover {
+    color: #005fb2;
+}
+
+/* ── Dealer / slot table (unchanged) ────────────────────────────────────── */
+.picker-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.picker-table th {
+    background-color: #f3f3f3;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    text-align: left;
+    border: 1px solid #dddbda;
+    width: 50%;
+}
+
+.picker-col {
+    vertical-align: top;
+    padding: 0.5rem 1rem;
+    border: 1px solid #dddbda;
+    width: 50%;
+}
+
+.picker-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.picker-row:last-child {
+    border-bottom: none;
+}
+
+.picker-row input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.picker-row label {
+    cursor: pointer;
+    color: #3e3e3c;
+}
+
+.dist {
+    color: #706e6b;
+    font-size: 0.75rem;
+}
+
+.summary {
+    background: #f4f6f9;
+    border-left: 4px solid #0070d2;
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.error-msg {
+    color: #c23934;
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    background: #fef1ee;
+    border-left: 4px solid #c23934;
+    border-radius: 4px;
+}

@@ -1,0 +1,106 @@
+<template>
+    <lightning-card title="Confirm Your Details">
+        <div class="slds-p-horizontal_medium">
+
+            <!-- Error -->
+            <template lwc:if={errorMessage}>
+                <div class="error-msg slds-m-bottom_medium">{errorMessage}</div>
+            </template>
+
+            <!-- Success -->
+            <template lwc:if={isSubmitted}>
+                <div class="success-msg slds-m-bottom_medium">
+                    ✅ Details confirmed! Finding showrooms near you…
+                </div>
+            </template>
+
+            <template lwc:if={showForm}>
+                <div class="slds-grid slds-wrap slds-gutters_small">
+
+                    <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                        <lightning-input
+                            label="First Name"
+                            value={firstName}
+                            data-field="firstName"
+                            onchange={handleInputChange}
+                            read-only={readOnly}>
+                        </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                        <lightning-input
+                            label="Last Name"
+                            value={lastName}
+                            data-field="lastName"
+                            onchange={handleInputChange}
+                            read-only={readOnly}>
+                        </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                        <lightning-input
+                            label="Mobile"
+                            type="tel"
+                            value={mobile}
+                            data-field="mobile"
+                            onchange={handleInputChange}
+                            read-only={readOnly}>
+                        </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                        <lightning-input
+                            label="Email"
+                            type="email"
+                            value={emailId}
+                            data-field="emailId"
+                            onchange={handleInputChange}
+                            read-only={readOnly}>
+                        </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                        <lightning-input
+                            label="City"
+                            value={city}
+                            data-field="city"
+                            onchange={handleInputChange}
+                            read-only={readOnly}>
+                        </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                        <lightning-input
+                            label="Zip / Postal Code"
+                            value={zip}
+                            data-field="zip"
+                            onchange={handleInputChange}
+                            read-only={readOnly}>
+                        </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                        <lightning-input
+                            label="Vehicle Model"
+                            value={vehicleModel}
+                            data-field="vehicleModel"
+                            onchange={handleInputChange}
+                            read-only={readOnly}>
+                        </lightning-input>
+                    </div>
+
+                </div>
+
+                <div class="slds-m-bottom_medium">
+                    <lightning-button
+                        label={submitLabel}
+                        variant="brand"
+                        disabled={isDisabled}
+                        onclick={handleSubmit}>
+                    </lightning-button>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

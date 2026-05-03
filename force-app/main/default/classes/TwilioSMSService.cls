@@ -11,13 +11,36 @@ public without sharing class TwilioSMSService {
      * Accepts a list of SendRequest and dispatches each asynchronously.
      */
     @InvocableMethod(label='Send WhatsApp or SMS via Twilio' description='Sends a WhatsApp or SMS message via Twilio. Set channel to WhatsApp or SMS.')
-    public static void sendFromFlow(List<SendRequest> requests) {
+    public static List<SendResponse> sendFromFlow(List<SendRequest> requests) {
+        List<SendResponse> responses = new List<SendResponse>();
         for (SendRequest r : requests) {
+            SendResponse resp = new SendResponse();
             if (String.isNotBlank(r.toPhone) && String.isNotBlank(r.messageBody)) {
                 String channel = String.isNotBlank(r.channel) ? r.channel : 'WhatsApp';
-                sendMessageAsync(r.toPhone, r.messageBody, channel);
+                // Try synchronous send first
+                Boolean success = doCalloutDirect(r.toPhone, r.messageBody, channel);
+                if (success) {
+                    resp.success = true;
+                    resp.message = 'SMS sent successfully to ' + r.toPhone;
+                } else {
+                    resp.success = false;
+                    resp.message = 'Failed to send SMS to ' + r.toPhone + '. Check debug logs.';
+                }
+            } else {
+                resp.success = false;
+                resp.message = 'Missing phone number or message body';
             }
+            responses.add(resp);
         }
+        return responses;
+    }
+
+    public class SendResponse {
+        @InvocableVariable(label='Success')
+        public Boolean success;
+
+        @InvocableVariable(label='Message')
+        public String message;
     }
 
     public class SendRequest {
@@ -66,6 +89,11 @@ public without sharing class TwilioSMSService {
             String accountSid = config.AccountSid__c;
             String fromPhone  = config.FromPhoneNumber__c;
 
+            if (String.isBlank(toPhone) || String.isBlank(body)) {
+                System.debug('TwilioSMSService: Missing phone or body');
+                return false;
+            }
+
             if (!toPhone.startsWith('+')) toPhone = '+91' + toPhone;
             if (!fromPhone.startsWith('+')) fromPhone = '+' + fromPhone;
 
@@ -76,6 +104,9 @@ public without sharing class TwilioSMSService {
             String requestBody = 'To='   + EncodingUtil.urlEncode(toAddress,   'UTF-8')
                 + '&From=' + EncodingUtil.urlEncode(fromAddress, 'UTF-8')
                 + '&Body=' + EncodingUtil.urlEncode(body, 'UTF-8');
+
+            System.debug('TwilioSMSService: Sending ' + channel + ' to ' + toPhone);
+            System.debug('TwilioSMSService: Request body: ' + requestBody);
 
             HttpRequest req = new HttpRequest();
             req.setEndpoint(NAMED_CREDENTIAL + '/2010-04-01/Accounts/' + accountSid + '/Messages.json');
@@ -89,9 +120,11 @@ public without sharing class TwilioSMSService {
                 System.debug('Twilio error body: ' + res.getBody());
                 return false;
             }
+            System.debug('Twilio ' + channel + ' sent successfully');
             return true;
         } catch (Exception e) {
             System.debug('TwilioSMSService.doCalloutDirect error: ' + e.getMessage());
+            System.debug('Stack trace: ' + e.getStackTraceString());
             return false;
         }
     }
@@ -102,15 +135,23 @@ public without sharing class TwilioSMSService {
 
     private static TwilioConfig__mdt getTwilioConfig() {
         List<TwilioConfig__mdt> configs = [
-            SELECT AccountSid__c, FromPhoneNumber__c
+            SELECT DeveloperName, AccountSid__c, FromPhoneNumber__c
             FROM TwilioConfig__mdt
-            WHERE DeveloperName = 'Default'
-            LIMIT 1
+            ORDER BY DeveloperName ASC
+            LIMIT 10
         ];
         if (configs.isEmpty()) {
-            throw new TwilioException('TwilioConfig__mdt record "Default" not found.');
+            throw new TwilioException('No TwilioConfig__mdt records found.');
         }
-        return configs[0];
+        
+        // Prioritize Default config first
+        for (TwilioConfig__mdt config : configs) {
+            if (config.DeveloperName == 'Default') {
+                return config;  // Use Default config
+            }
+        }
+        
+        return configs[0];  // Fallback to first config
     }
 
     public class TwilioException extends Exception {}

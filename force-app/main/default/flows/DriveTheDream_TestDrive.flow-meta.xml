@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Location_Capture</name>
+        <label>Location Capture</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>addScreenPop</actionName>
+        <actionType>addScreenPop</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>screenPop</name>
+            <value>
+                <stringValue>[{&quot;id&quot;:&quot;7ec39436&quot;,&quot;isFocused&quot;:false,&quot;screenFlowInputType&quot;:&quot;SCREEN_FLOW_LIST&quot;,&quot;targetType&quot;:&quot;SCREEN_FLOW&quot;,&quot;dropdownFlowId&quot;:&quot;3ddbm00001vZuu1AAC&quot;,&quot;dropdownFlowLabel&quot;:&quot;Confirm Location Flow&quot;,&quot;targetFlowName&quot;:&quot;Confirm_Location_Flow&quot;}]</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>addScreenPop</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>Test Drive booking flow for Drive the Dream agent.</description>
+    <environments>Default</environments>
+    <interviewLabel>DriveTheDream_TestDrive {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>DriveTheDream TestDrive</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Location_Capture</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+</Flow>

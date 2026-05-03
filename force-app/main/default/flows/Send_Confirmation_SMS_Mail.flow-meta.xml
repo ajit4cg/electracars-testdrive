@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Confirmation_Email_to_User</name>
+        <label>Send Confirmation Email to User</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Send_Whatsapp_or_SMS_Via_Twilio</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recipientAddresses</name>
+            <value>
+                <collectionElements>
+                    <elementReference>emailAddress</elementReference>
+                </collectionElements>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>bccAddresses</name>
+            <value>
+                <collectionElements>
+                    <stringValue>shreeyarashinkar@gmail.com</stringValue>
+                </collectionElements>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>sakshikul13@gmail.com</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>composeEmailContent</name>
+            <value>
+                <stringValue>True</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>Subject</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <inputConfiguratorMode>Custom</inputConfiguratorMode>
+                <stringValue>&lt;p&gt;{!ConfirmationMessage}&lt;/p&gt;</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recipientId</name>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+        <offset>0</offset>
+        <versionString>2.0.1</versionString>
+    </actionCalls>
+    <actionCalls>
+        <name>Send_Whatsapp_or_SMS_Via_Twilio</name>
+        <label>Send Whatsapp or SMS Via Twilio</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>TwilioSMSService</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>messageBody</name>
+            <value>
+                <elementReference>ConfirmationMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>toPhone</name>
+            <value>
+                <elementReference>CustomerPhone</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>TwilioSMSService</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <interviewLabel>Send Confirmation SMS &amp; Mail {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Send Confirmation SMS &amp; Mail</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Send_Confirmation_Email_to_User</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>ConfirmationMessage</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>═══════════════════════════════════════════
+              ELECTRA CARS
+        Test Drive Confirmation
+═══════════════════════════════════════════
+
+Hi {!customerName},
+
+Your test drive has been successfully booked!
+We&apos;ve prepared the {!vehicleModel} for your arrival.
+
+───────────────────────────────────────────
+  📋  BOOKING DETAILS
+───────────────────────────────────────────
+
+  📅  Date      :  {!appointmentDate}
+  🕐  Time      :  {!appointmentTime}
+  📍  Location  :  {!DealerName}
+                    {!DealerAddress}
+
+  📞  Dealer Contact  :  {!DealerContactPhone}
+  ✉️  Dealer Email    :  {!DealerContactEmail}
+
+───────────────────────────────────────────
+  🧑‍✈️  YOUR REPRESENTATIVE
+───────────────────────────────────────────
+
+  {!TestDriveAccompanyName} will assist you
+  throughout your experience.
+
+  📞  {!TestDriveAccompanyPhone}
+  ✉️  {!TestDriveAccompanyEmail}
+
+───────────────────────────────────────────
+  🔗  QUICK LINKS
+───────────────────────────────────────────
+
+  📍 Get Directions:
+  {!GoogleMapsLink}
+
+  🗓 Add to Calendar:
+  {!GoogleCalendarLink}
+
+═══════════════════════════════════════════
+  © 2026 Electra Cars. All rights reserved.
+  This is an automated confirmation of
+  your test drive booking.
+═══════════════════════════════════════════</text>
+    </textTemplates>
+    <textTemplates>
+        <name>Subject</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>&lt;p&gt;Your Test Drive is Booked&lt;/p&gt;</text>
+    </textTemplates>
+    <variables>
+        <description>Date of Test Drive</description>
+        <name>appointmentDate</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Appointment Start Time</description>
+        <name>appointmentTime</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Name of the customer</description>
+        <name>customerName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>CustomerPhone</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>DealerAddress</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>DealerContactEmail</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>DealerContactPhone</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>DealerName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Email Address of the Customer</description>
+        <name>emailAddress</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>GoogleCalendarLink</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>GoogleMapsLink</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>TestDriveAccompanyEmail</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>TestDriveAccompanyName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>TestDriveAccompanyPhone</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Model for test drive</description>
+        <name>vehicleModel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

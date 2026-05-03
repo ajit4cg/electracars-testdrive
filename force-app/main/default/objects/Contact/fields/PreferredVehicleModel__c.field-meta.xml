@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>PreferredVehicleModel__c</fullName>
-    <description>Stores the customer's preferred Electra vehicle model for personalized test-drive recommendations.</description>
+    <description>Stores the customer&apos;s preferred Electra vehicle model for personalized test-drive recommendations.</description>
     <externalId>false</externalId>
-    <inlineHelpText>Used by the test-drive experience to recommend the customer's preferred vehicle.</inlineHelpText>
+    <inlineHelpText>Used by the test-drive experience to recommend the customer&apos;s preferred vehicle.</inlineHelpText>
     <label>Preferred Vehicle Model</label>
     <length>80</length>
     <required>false</required>
-    <trackTrending>false</trackTrending>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
     <type>Text</type>
     <unique>false</unique>
 </CustomField>

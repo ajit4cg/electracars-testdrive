@@ -1,0 +1,148 @@
+<template>
+    <lightning-card title="Book Your Test Drive">
+        <div class="slds-p-around_medium">
+
+            <!-- ── PHASE 1: Date Picker Calendar ─────────────────────────── -->
+            <template lwc:if={showDatePicker}>
+                <div class="date-picker-wrapper">
+                    <p class="step-label">📅 Step 1 of 2 — Pick a date for your test drive</p>
+
+                    <!-- Month navigation -->
+                    <div class="cal-header">
+                        <button class="cal-nav" onclick={prevMonth} disabled={isPrevDisabled}>&#8249;</button>
+                        <span class="cal-month-label">{calMonthLabel}</span>
+                        <button class="cal-nav" onclick={nextMonth}>&#8250;</button>
+                    </div>
+
+                    <!-- Day-of-week headers -->
+                    <div class="cal-grid">
+                        <div class="cal-dow">Sun</div>
+                        <div class="cal-dow">Mon</div>
+                        <div class="cal-dow">Tue</div>
+                        <div class="cal-dow">Wed</div>
+                        <div class="cal-dow">Thu</div>
+                        <div class="cal-dow">Fri</div>
+                        <div class="cal-dow">Sat</div>
+
+                        <!-- Empty leading cells -->
+                        <template for:each={leadingBlanks} for:item="b">
+                            <div key={b} class="cal-cell cal-blank"></div>
+                        </template>
+
+                        <!-- Day cells -->
+                        <template for:each={calDays} for:item="day">
+                            <div
+                                key={day.iso}
+                                class={day.cellClass}
+                                data-iso={day.iso}
+                                onclick={handleDayClick}
+                            >{day.num}</div>
+                        </template>
+                    </div>
+
+                    <p class="cal-hint">Sundays and past dates are unavailable.</p>
+                </div>
+            </template>
+
+            <!-- ── PHASE 2 & 3: Dealer + Slot Picker ─────────────────────── -->
+            <template lwc:if={showPickerPhase}>
+
+                <!-- Selected date badge + change link -->
+                <div class="date-badge slds-m-bottom_small">
+                    <span>📅 <strong>{selectedDate}</strong></span>
+                    <button class="change-date-btn" onclick={handleChangeDate}>Change date</button>
+                </div>
+
+                <!-- Error -->
+                <template lwc:if={errorMessage}>
+                    <div class="error-msg slds-m-bottom_medium">{errorMessage}</div>
+                </template>
+
+                <!-- Loading -->
+                <template lwc:if={isLoading}>
+                    <div class="slds-align_absolute-center slds-m-vertical_large">
+                        <lightning-spinner alternative-text="Loading dealers..." size="medium"></lightning-spinner>
+                    </div>
+                </template>
+
+                <!-- Picker table -->
+                <template lwc:if={showPicker}>
+                    <p class="step-label">🏢 Step 2 of 2 — Choose a showroom and time slot</p>
+
+                    <table class="picker-table">
+                        <thead>
+                            <tr>
+                                <th>Select Showroom</th>
+                                <th>Select Time Slot</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <!-- Dealers column -->
+                                <td class="picker-col">
+                                    <template for:each={dealers} for:item="dealer">
+                                        <div key={dealer.dealerAccountId} class="picker-row">
+                                            <input
+                                                type="checkbox"
+                                                id={dealer.dealerAccountId}
+                                                data-id={dealer.dealerAccountId}
+                                                checked={dealer.isSelected}
+                                                disabled={isDisabled}
+                                                onchange={handleDealerSelect}
+                                            />
+                                            <label for={dealer.dealerAccountId}>
+                                                {dealer.dealerName}
+                                                <span class="dist">({dealer.distanceKm} km)</span>
+                                            </label>
+                                        </div>
+                                    </template>
+                                </td>
+
+                                <!-- Time slots column -->
+                                <td class="picker-col">
+                                    <template for:each={timeSlots} for:item="slot">
+                                        <div key={slot.label} class="picker-row">
+                                            <input
+                                                type="checkbox"
+                                                id={slot.label}
+                                                data-label={slot.label}
+                                                data-start={slot.startHour}
+                                                data-end={slot.endHour}
+                                                checked={slot.isSelected}
+                                                disabled={isDisabled}
+                                                onchange={handleSlotSelect}
+                                            />
+                                            <label for={slot.label}>{slot.label}</label>
+                                        </div>
+                                    </template>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Summary -->
+                    <template lwc:if={hasSelection}>
+                        <div class="summary slds-m-top_medium">
+                            <p>✅ <strong>{selectedDealerName}</strong>
+                                &nbsp;|&nbsp; <strong>{selectedSlotLabel}</strong>
+                                &nbsp;|&nbsp; {selectedDate}
+                                &nbsp;|&nbsp; {selectedModel}
+                            </p>
+                        </div>
+                    </template>
+
+                    <div class="slds-m-top_medium">
+                        <lightning-button
+                            label={submitLabel}
+                            variant="brand"
+                            disabled={submitDisabled}
+                            onclick={handleSubmit}>
+                        </lightning-button>
+                    </div>
+                </template>
+
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

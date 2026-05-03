@@ -81,21 +81,6 @@ public without sharing class TestDriveNotificationService {
         mail.setSubject('Your Electra Cars Test Drive is Confirmed - ' + td.Name);
         mail.setHtmlBody(buildEmailBody(td, lead, dealership));
         mail.setSaveAsActivity(true);
-
-        // Use org-wide email address if available so guest-context sends don't fail
-        try {
-            List<OrgWideEmailAddress> owas = [
-                SELECT Id FROM OrgWideEmailAddress
-                WHERE IsAllowAllProfiles = true
-                LIMIT 1
-            ];
-            if (!owas.isEmpty()) {
-                mail.setOrgWideEmailAddressId(owas[0].Id);
-            }
-        } catch (Exception ex) {
-            System.debug('OrgWideEmailAddress lookup skipped: ' + ex.getMessage());
-        }
-
         try {
             Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{ mail });
         } catch (Exception e) {
